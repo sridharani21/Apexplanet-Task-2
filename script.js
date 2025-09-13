@@ -377,7 +377,6 @@ class DashboardManager {
         taskContainer.innerHTML = recentTasks.map(task => this.createTaskElement(task)).join('');
     }
 
-
     static createTaskElement(task) {
         const dueDate = new Date(task.dueDate);
         const isOverdue = task.status !== 'completed' && dueDate < new Date();
@@ -646,8 +645,6 @@ class UIManager {
         console.log('Edit task:', taskId);
         this.closeModal();
     }
-
-
 
     static closeModal() {
         const modal = document.querySelector('.modal-overlay');
@@ -1465,39 +1462,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
- // Add interactive functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Filter button functionality
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    // Add your filter logic here
-                    console.log('Filtering by:', btn.textContent.trim());
-                });
-            });
-
-            // Task item click functionality
-            const taskItems = document.querySelectorAll('.task-item');
-            taskItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    // Add your task details view logic here
-                    console.log('Task clicked:', item.querySelector('.task-title').textContent);
-                });
-            });
-
-            // View All button
-            const viewAllBtn = document.querySelector('.view-all-btn');
-            viewAllBtn.addEventListener('click', () => {
-                // Add navigation to all tasks page
-                console.log('Navigate to all tasks');
-            });
-        });
-
-        
 
 // Make functions globally available
 window.AuthManager = AuthManager;
