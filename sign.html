@@ -147,77 +147,18 @@
             margin-bottom: 8px;
         }
 
-        .social-buttons {
+        /* Form Styles - Fixed Layout */
+        .signup-form {
             display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .social-btn {
-            flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #E5E7EB;
-            border-radius: 12px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .social-btn:hover {
-            border-color: #8B5CF6;
-            background: rgba(139, 92, 246, 0.05);
-        }
-
-        .google-btn::before {
-            content: 'G';
-            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-        }
-
-        .facebook-btn::before {
-            content: 'f';
-            color: #1877F2;
-            font-weight: bold;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-            color: #9CA3AF;
-            font-size: 14px;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #E5E7EB;
-            z-index: 1;
-        }
-
-        .divider span {
-            background: white;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
         .form-group label {
@@ -228,11 +169,6 @@
             margin-bottom: 8px;
         }
 
-input{
-  padding: 10px 8px;
-}
-        
-
         .form-group input {
             width: 100%;
             padding: 14px 16px;
@@ -241,6 +177,7 @@ input{
             font-size: 16px;
             transition: all 0.3s ease;
             background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .form-group input:focus {
@@ -251,24 +188,26 @@ input{
 
         .password-group {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
- label {
-            display: block;
-            color: #374151;
-            font-size: 14px;
-            font-weight: 500;
-            
-        }
+
         .password-toggle {
             position: absolute;
-            right: -400px;
-            top: 185px;
+            right: 16px;
+            top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             color: #9CA3AF;
             cursor: pointer;
             font-size: 16px;
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            color: #8B5CF6;
         }
 
         .create-btn {
@@ -283,7 +222,7 @@ input{
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
         .create-btn:hover {
@@ -291,10 +230,17 @@ input{
             box-shadow: 0 12px 35px rgba(139, 92, 246, 0.4);
         }
 
+        .create-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .login-link {
             text-align: center;
             color: #6B7280;
             font-size: 14px;
+            margin-top: 20px;
         }
 
         .login-link a {
@@ -344,27 +290,33 @@ input{
                 <h1>Create Account</h1>
             </div>
             
-            <form onsubmit="handleCreateAccount(event)">
-              <label for="name">Full Name</label><br>
-  <input type="text" name="fullName"  required style="width: 340px; height: 50px; border-radius: 10px;border: none;box-shadow:2px 2px 3px 3px rgb(214, 212, 212);margin-bottom: 10px; "/>
-  <label for="email">Email</label><br>
-  <input type="email" name="email" required style="width: 340px; height: 50px; border-radius: 10px;border: none;box-shadow:2px 2px 3px 3px rgb(190, 190, 190); margin-bottom: 10px;"/>
-  <div>
-    <label for="password" style="margin-bottom: 15px;">Password</label>
-    <input type="password" id="password" name="password"  required style=" width: 340px; height: 50px; border-radius: 10px;border: none;box-shadow:2px 2px 3px 3px rgb(197, 196, 196); margin-bottom: 10px;" />
-    <button type="button" class="password-toggle" onclick="togglePassword()" style="margin-top: 280px; left: 315px;">👁️</button>
-  </div>
-  <button type="submit" class="create-btn">Create Account</button>
-</form>
+            <form class="signup-form" onsubmit="handleCreateAccount(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                </div>
 
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-group">
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="create-btn">Create Account</button>
+            </form>
             
             <div class="login-link">
                 Already have an account? <a href="./login.html" onclick="goToLogin()">Log in</a>
             </div>
-          </div>
+        </div>
     </div>
-
-   
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
@@ -578,13 +530,15 @@ input{
   async function displayTasks() {
     const tasks = await getUserTasks();
     const taskList = document.getElementById('taskList');
-    taskList.innerHTML = '';
+    if (taskList) {
+      taskList.innerHTML = '';
 
-    tasks.forEach(task => {
-      const li = document.createElement('li');
-      li.textContent = `${task.title}: ${task.description} (Created: ${new Date(task.createdAt).toLocaleString()})`;
-      taskList.appendChild(li);
-    });
+      tasks.forEach(task => {
+        const li = document.createElement('li');
+        li.textContent = `${task.title}: ${task.description} (Created: ${new Date(task.createdAt).toLocaleString()})`;
+        taskList.appendChild(li);
+      });
+    }
   }
 
   // Password Toggle
@@ -633,10 +587,5 @@ input{
   window.displayTasks = displayTasks;
 </script>
 
-
-
 </body>
 </html>
-
-
-
