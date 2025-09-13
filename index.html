@@ -22,11 +22,8 @@
         }
 
         .container {
-          
-         
             border-radius: 24px;
             padding: 60px 40px;
-            
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -69,11 +66,59 @@
             border-radius: 50%;
             filter: blur(30px);
             animation: pulse 4s ease-in-out infinite;
+            transition: all 0.5s ease;
+        }
+
+        .gradient-orb::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, 
+                rgba(139, 92, 246, 0.9) 0%,
+                rgba(168, 85, 247, 0.7) 30%,
+                rgba(192, 132, 252, 0.5) 60%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gradient-orb.glow-active::before {
+            transform: scale(1.3);
+            filter: blur(35px);
+            background: radial-gradient(circle, 
+                rgba(255, 215, 0, 1) 0%,
+                rgba(255, 165, 0, 0.9) 20%,
+                rgba(255, 105, 180, 0.8) 40%,
+                rgba(147, 112, 219, 0.7) 60%,
+                rgba(106, 90, 205, 0.6) 80%,
+                rgba(72, 61, 139, 0.4) 100%
+            );
+        }
+
+        .gradient-orb.glow-active::after {
+            opacity: 1;
+            transform: scale(1.2);
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 0.8; }
             50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg) scale(1.2);
+                opacity: 1;
+            }
         }
 
         .welcome-text {
@@ -84,6 +129,29 @@
             font-weight: 700;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
             letter-spacing: -1px;
+            transition: all 0.5s ease;
+        }
+
+        .welcome-text.glow-active {
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(139, 92, 246, 0.6),
+                0 0 30px rgba(168, 85, 247, 0.4),
+                0 2px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #FFD700;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+        }
+
+        .sparkle.animate {
+            animation: sparkle 1.5s ease-out;
         }
 
         .subtitle {
@@ -106,12 +174,29 @@
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .get-started-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
         }
 
         .get-started-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(139, 92, 246, 0.4);
             background: linear-gradient(135deg, #7C3AED, #8B5CF6, #A855F7);
+        }
+
+        .get-started-btn:hover::before {
+            left: 100%;
         }
 
         .get-started-btn:active {
@@ -143,17 +228,71 @@
 <body>
     <div class="brand">NexTask</div>
     <div class="container">
-        
-        
-        <div class="gradient-orb">
-            <h1 class="welcome-text">Welcome</h1>
+        <div class="gradient-orb" id="gradientOrb">
+            <h1 class="welcome-text" id="welcomeText">Welcome</h1>
         </div>
         
         <p class="subtitle">Experience something beautiful and get ready to explore amazing possibilities.</p>
         
-        <a style="text-decoration: none;" href="./signup.html" class="get-started-btn" >Get Started</a>
+        <button class="get-started-btn" id="getStartedBtn">Get Started</button>
     </div>
 
-    <script src="./script.js"></script>
+    <script>
+        document.getElementById('getStartedBtn').addEventListener('click', function() {
+            const orb = document.getElementById('gradientOrb');
+            const text = document.getElementById('welcomeText');
+            
+            // Add glow classes
+            orb.classList.add('glow-active');
+            text.classList.add('glow-active');
+            
+            // Create sparkle effects
+            createSparkles();
+            
+            // Remove glow after animation
+            setTimeout(() => {
+                orb.classList.remove('glow-active');
+                text.classList.remove('glow-active');
+            }, 1500);
+            
+            // Redirect after effect
+            setTimeout(() => {
+                window.location.href = './signup.html';
+            }, 800);
+        });
+
+        function createSparkles() {
+            const orb = document.getElementById('gradientOrb');
+            const sparkleCount = 8;
+            
+            for (let i = 0; i < sparkleCount; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.textContent = '✨';
+                    
+                    // Random position around the orb
+                    const angle = (360 / sparkleCount) * i + Math.random() * 45;
+                    const radius = 120 + Math.random() * 40;
+                    const x = Math.cos(angle * Math.PI / 180) * radius;
+                    const y = Math.sin(angle * Math.PI / 180) * radius;
+                    
+                    sparkle.style.left = `50%`;
+                    sparkle.style.top = `50%`;
+                    sparkle.style.transform = `translate(${x}px, ${y}px)`;
+                    
+                    orb.appendChild(sparkle);
+                    sparkle.classList.add('animate');
+                    
+                    // Remove sparkle after animation
+                    setTimeout(() => {
+                        if (sparkle.parentNode) {
+                            sparkle.parentNode.removeChild(sparkle);
+                        }
+                    }, 1500);
+                }, i * 100);
+            }
+        }
+    </script>
 </body>
 </html>
