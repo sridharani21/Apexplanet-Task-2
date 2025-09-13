@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Fleeped</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #c8a8e9, #dbc7f0, #e8d4f5, #f0e1fa);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .left-section {
+            flex: 1;
+            background: linear-gradient(135deg, #8ECAE6, #219EBC, #023047);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            top: -50px;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .left-section::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, 
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                transparent 100%
+            );
+            border-radius: 50%;
+            bottom: -30px;
+            left: -30px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8B5CF6, #A855F7);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        .logo::before {
+            content: '✓';
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .left-section h2 {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .left-section p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand {
+            color: #8B5CF6;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-align: right;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            color: #1F2937;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .social-btn:hover {
+            border-color: #8B5CF6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .google-btn::before {
+            content: 'G';
+            background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        .facebook-btn::before {
+            content: 'f';
+            color: #1877F2;
+            font-weight: bold;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #E5E7EB;
+            z-index: 1;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9CA3AF;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .create-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #8B5CF6, #A855F7, #C084FC);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(139, 92, 246, 0.4);
+        }
+
+        .login-link {
+            text-align: center;
+            color: #6B7280;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #8B5CF6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                max-width: 400px;
+            }
+            
+            .left-section {
+                padding: 40px 30px;
+                min-height: 200px;
+            }
+            
+            .right-section {
+                padding: 40px 30px;
+            }
+            
+            .brand {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="logo"></div>
+            <h2>Join Our Community</h2>
+            <p>Create your account and discover amazing features, connect with others, and unlock your potential.</p>
+        </div>
+        
+        <div class="right-section">
+            <div class="brand">NexTask</div>
+            
+            <div class="form-header">
+                <h1>Create Account</h1>
+            </div>
+            
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <form onsubmit="handleCreateAccount(event)">
+  <input type="text" name="fullName" placeholder="Full Name" required />
+  <input type="email" name="email" placeholder="Email" required />
+  <div>
+    <input type="password" id="password" name="password" placeholder="Password" required />
+    <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+  </div>
+  <button type="submit" class="create-btn">Create Account</button>
+</form>
+
+            
+            <div class="login-link">
+                Already have an account? <a href="./login.html" onclick="goToLogin()">Log in</a>
+            </div>
+        </div>
+    </div>
+
+   
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAXuigFW9jHpIAqQWVlsCJk-jFmktb3oH8",
+    authDomain: "nextask-d818b.firebaseapp.com",
+    projectId: "nextask-d818b",
+    storageBucket: "nextask-d818b.appspot.com",
+    messagingSenderId: "644127952047",
+    appId: "1:644127952047:web:5b205ef88eb796cec8585a",
+    measurementId: "G-WEKDX2FNQZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Helper – Get user data from localStorage
+  function getUserData() {
+    const data = localStorage.getItem('userData');
+    return data ? JSON.parse(data) : null;
+  }
+
+  function isLoggedIn() {
+    return !!getUserData();
+  }
+
+  function checkAccountStatus() {
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    if (currentPage === 'homepage.html' && !isLoggedIn()) {
+      alert('Please login or create an account first.');
+      window.location.href = './login.html';
+      return false;
+    }
+
+    return true;
+  }
+
+  // Create Account
+  function handleCreateAccount(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const fullName = formData.get('fullName').trim();
+    const email = formData.get('email').trim();
+    const password = formData.get('password').trim();
+
+    if (!fullName || !email || !password) {
+      alert('Please fill in all fields.');
+      return false;
+    }
+
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return false;
+    }
+
+    const createBtn = document.querySelector('.create-btn');
+    createBtn.textContent = 'Creating Account...';
+    createBtn.disabled = true;
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        localStorage.setItem('userData', JSON.stringify({
+          fullName: fullName,
+          email: email,
+          uid: user.uid,
+          createdAt: new Date().toISOString()
+        }));
+
+        alert(`Account created successfully! Welcome, ${fullName}!`);
+        window.location.href = './homepage.html';
+      })
+      .catch((error) => {
+        alert(`Error: ${error.message}`);
+        createBtn.textContent = 'Create Account';
+        createBtn.disabled = false;
+      });
+
+    return false;
+  }
+
+  // Login
+  function handleLogin(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const email = formData.get('email').trim();
+    const password = formData.get('password').trim();
+
+    if (!email || !password) {
+      alert('Please enter both email and password.');
+      return false;
+    }
+
+    const loginBtn = document.querySelector('.login-btn');
+    loginBtn.textContent = 'Signing In...';
+    loginBtn.disabled = true;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        localStorage.setItem('userData', JSON.stringify({
+          email: email,
+          uid: user.uid,
+          loginAt: new Date().toISOString()
+        }));
+
+        alert('Login successful!');
+        window.location.href = './homepage.html';
+      })
+      .catch((error) => {
+        alert(`Login failed: ${error.message}`);
+        loginBtn.textContent = 'Login';
+        loginBtn.disabled = false;
+      });
+
+    return false;
+  }
+
+  // Logout
+  function logout() {
+    signOut(auth)
+      .then(() => {
+        localStorage.removeItem('userData');
+        alert('Logged out successfully.');
+        window.location.href = './welcome.html';
+      })
+      .catch((error) => {
+        alert(`Error: ${error.message}`);
+      });
+  }
+
+  // Add Task
+  async function addTask(title, description) {
+    const user = getUserData();
+    if (!user || !user.uid) {
+      alert('Please login first.');
+      window.location.href = './login.html';
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, 'tasks'), {
+        uid: user.uid,
+        title: title,
+        description: description,
+        createdAt: new Date().toISOString(),
+        completed: false
+      });
+
+      alert('Task added successfully!');
+      displayTasks();
+    } catch (error) {
+      alert('Error adding task: ' + error.message);
+    }
+  }
+
+  // Handle Add Task Form Submission
+  function handleAddTask(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const title = formData.get('title').trim();
+    const description = formData.get('description').trim();
+
+    if (title && description) {
+      addTask(title, description);
+      event.target.reset();
+    } else {
+      alert('Please fill in all fields.');
+    }
+  }
+
+  // Get User's Tasks
+  async function getUserTasks() {
+    const user = getUserData();
+    if (!user || !user.uid) return [];
+
+    const q = query(collection(db, 'tasks'), where('uid', '==', user.uid));
+    const querySnapshot = await getDocs(q);
+
+    const tasks = [];
+    querySnapshot.forEach((doc) => {
+      tasks.push({ id: doc.id, ...doc.data() });
+    });
+
+    return tasks;
+  }
+
+  // Display User Tasks
+  async function displayTasks() {
+    const tasks = await getUserTasks();
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = '';
+
+    tasks.forEach(task => {
+      const li = document.createElement('li');
+      li.textContent = `${task.title}: ${task.description} (Created: ${new Date(task.createdAt).toLocaleString()})`;
+      taskList.appendChild(li);
+    });
+  }
+
+  // Password Toggle
+  function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleButton = document.querySelector('.password-toggle');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      toggleButton.textContent = '🙈';
+    } else {
+      passwordInput.type = 'password';
+      toggleButton.textContent = '👁️';
+    }
+  }
+
+  function goToLogin() {
+    window.location.href = './login.html';
+  }
+
+  function goToSignUp() {
+    window.location.href = './create_account.html';
+  }
+
+  function forgotPassword() {
+    alert('Forgot password functionality will be implemented here.');
+  }
+
+  // Initialize when page loads
+  document.addEventListener('DOMContentLoaded', () => {
+    checkAccountStatus();
+    displayTasks();
+  });
+
+  window.logout = logout;
+  window.handleCreateAccount = handleCreateAccount;
+  window.handleLogin = handleLogin;
+  window.togglePassword = togglePassword;
+  window.goToLogin = goToLogin;
+  window.goToSignUp = goToSignUp;
+  window.forgotPassword = forgotPassword;
+  window.addTask = addTask;
+  window.handleAddTask = handleAddTask;
+  window.getUserData = getUserData;
+  window.isLoggedIn = isLoggedIn;
+  window.displayTasks = displayTasks;
+</script>
+
+
+
+</body>
+</html>
